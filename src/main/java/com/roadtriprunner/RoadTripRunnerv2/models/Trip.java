@@ -1,5 +1,12 @@
 package com.roadtriprunner.RoadTripRunnerv2.models;
 
+import lombok.Data;
+
+import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
+
+@Data
+@Entity
 public class Trip extends AbstractEntity {
 
     /*
@@ -23,13 +30,22 @@ public class Trip extends AbstractEntity {
     https://www.javadoc.io/doc/com.google.maps/google-maps-services/latest/com/google/maps/model/PlaceDetails.html
      */
 
+    @NotBlank(message="A trip name is required to save your trip.")
     private String tripName;
 
+    @NotBlank(message="Enter a starting location.")
     private String startingLocation;
 
+    @NotBlank(message="Enter a destination.")
     private String endingLocation;
 
     public Trip (String startingLocation, String endingLocation) {
+        this.startingLocation = startingLocation;
+        this.endingLocation = endingLocation;
+    }
+
+    public Trip(String tripName, String startingLocation, String endingLocation) {
+        this.tripName = tripName;
         this.startingLocation = startingLocation;
         this.endingLocation = endingLocation;
     }
